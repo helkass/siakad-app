@@ -16,7 +16,7 @@ import {
 } from "./pages";
 import PublicLayout from "./components/layout/PublicLayout";
 import ProtectRoute from "./middleware/ProtectRoute";
-import UserLayout from "./components/Layout/UserLayout";
+import UserLayout from "./components/layout/UserLayout";
 
 function App() {
    return (
