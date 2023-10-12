@@ -57,8 +57,7 @@ const DashboardPage = () => {
                <BreadcrumbItem>
                   <Text>
                      {transkripNilai.data !== null &&
-                     transkripNilai.data.length > 0 &&
-                     transkripNilai.data[0].mahasiswa.semester % 2 === 0
+                     transkripNilai.data?.mahasiswa.semester % 2 === 0
                         ? "Genap"
                         : "Ganjil"}
                   </Text>
@@ -85,9 +84,7 @@ const DashboardPage = () => {
                         <BreadcrumbItem>
                            <Text>
                               {transkripNilai.data !== null &&
-                              transkripNilai.data.length > 0 &&
-                              transkripNilai.data[0].mahasiswa.semester % 2 ===
-                                 0
+                              transkripNilai.data?.mahasiswa.semester % 2 === 0
                                  ? "Genap"
                                  : "Ganjil"}
                            </Text>
@@ -133,8 +130,7 @@ const DashboardPage = () => {
                <Heading fontSize="18px" align="center">
                   Indeks Prestasi{" "}
                   {transkripNilai.data !== null &&
-                     transkripNilai.data.length > 0 &&
-                     transkripNilai.data[0].nilai}
+                     transkripNilai.data.nilai}
                </Heading>
             </CardSummary>
          </HStack>

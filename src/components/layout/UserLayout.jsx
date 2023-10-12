@@ -28,19 +28,28 @@ import { BiBook } from "react-icons/bi";
 import { MdOutlineListAlt, MdPayment } from "react-icons/md";
 import { BsCardChecklist } from "react-icons/bs";
 import user_image from "../../assets/user.jpg";
-import { useAuth } from "../../contexts/useAuth";
+import { isUnauthenticated, useAuth } from "../../contexts/useAuth";
 import { Helmet } from "react-helmet-async";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useFetch } from "../../helpers";
 
 const UserLayout = () => {
    const { isOpen, onClose, onOpen } = useDisclosure();
    const { logout } = useAuth();
+   const btnDrawerRef = useRef();
 
    return (
       <Container as="section" maxW="7xl" px={{ base: 0, md: 5 }}>
-         <Navbar logout={() => logout()} onOpen={onOpen} />
-         <DrawerNavigation isOpen={isOpen} onClose={onClose} />
+         <Navbar
+            btnRef={btnDrawerRef}
+            logout={() => logout()}
+            onOpen={onOpen}
+         />
+         <DrawerNavigation
+            btnRef={btnDrawerRef}
+            isOpen={isOpen}
+            onClose={onClose}
+         />
          <Outlet />
       </Container>
    );
@@ -49,9 +58,14 @@ const UserLayout = () => {
 const DrawerNavigation = ({ isOpen, onClose, btnRef }) => {
    const mahasiswa = useFetch();
    const { user } = useAuth();
+   const isAuthenticatedMahasiswa = isUnauthenticated();
 
    const getUser = useCallback(async () => {
-      await mahasiswa.get(`/mahasiswa/${user.id}`);
+      if (!user) {
+         await mahasiswa.get(`/mahasiswa/${user.id}`);
+      } else {
+         await mahasiswa.get(`/mahasiswa/${isAuthenticatedMahasiswa.id}`);
+      }
    }, []);
 
    const styles = {
@@ -247,7 +261,7 @@ const DrawerNavigation = ({ isOpen, onClose, btnRef }) => {
    );
 };
 
-const Navbar = ({ onOpen, logout }) => {
+const Navbar = ({ onOpen, logout, btnRef }) => {
    return (
       <HStack
          display="flex"
@@ -261,7 +275,7 @@ const Navbar = ({ onOpen, logout }) => {
          px={{ base: 2, md: 5 }}
          align="center">
          <HStack gap="10px">
-            <Button p="2" color="gray.500" onClick={onOpen}>
+            <Button p="2" color="gray.500" ref={btnRef} onClick={onOpen}>
                <FaBars size={16} />
             </Button>
             <Heading
