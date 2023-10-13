@@ -174,7 +174,7 @@ const HasilStudi = () => {
                                        </Td>
                                        <Td textAlign={"right"}>
                                           {Number(
-                                             transkrip?.data[0].nilai
+                                             transkrip?.data.nilai
                                           ).toFixed(2)}
                                        </Td>
                                     </Tr>
