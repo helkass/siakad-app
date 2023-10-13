@@ -15,7 +15,6 @@ import { AiFillPrinter } from "react-icons/ai";
 import { useFetch } from "../../../helpers";
 import { useAuth } from "../../../contexts/useAuth";
 import { useEffect } from "react";
-import { downloadBase64File } from "../../../utils/downloadFile";
 
 const RencanaStudi = () => {
    const jadwalKuliah = useFetch();
@@ -24,11 +23,13 @@ const RencanaStudi = () => {
    const { user } = useAuth();
 
    const handleDownload = () => {
-      downloadBase64File(
-         rencanaStudi.data?.file,
-         `KRS_${rencanaStudi.data?.nim}`,
-         ".pdf"
-      );
+      const link = document.createElement("a");
+
+      link.href = `data:application/pdf;base64,${
+         rencanaStudi.data.file.toString().split(",")[1]
+      }`;
+      link.download = `KRS_${rencanaStudi.data?.nim}.pdf`;
+      link.click();
    };
 
    useEffect(() => {

@@ -25,7 +25,6 @@ import {
 } from "@chakra-ui/react";
 import { useFetch } from "../../../helpers";
 import { useEffect } from "react";
-import { downloadBase64File } from "../../../utils/downloadFile";
 import { useLocalStorage } from "../../../contexts/useLocalStorage";
 
 const DashboardPage = () => {
@@ -35,11 +34,13 @@ const DashboardPage = () => {
    const user = useLocalStorage("mahasiswa", null);
 
    const handleDownloadKRS = () => {
-      downloadBase64File(
-         rencanaStudi.data?.file,
-         `KRS_${rencanaStudi.data?.nim}`,
-         ".pdf"
-      );
+      const link = document.createElement("a");
+
+      link.href = `data:application/pdf;base64,${
+         rencanaStudi.data.file.toString().split(",")[1]
+      }`;
+      link.download = `KRS_${rencanaStudi.data?.nim}.pdf`;
+      link.click();
    };
 
    useEffect(() => {
