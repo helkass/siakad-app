@@ -26,7 +26,7 @@ const ValidationRegister = () => {
                navigate(`/registrasi/${res.data.data.kode}`);
                localStorage.setItem("validation", JSON.stringify(changeValue));
             }
-            if (res.status >= 400 || res.data?.error) {
+            if (res.status >= 400 || res.data.data?.error) {
                toast({
                   status: "error",
                   description: res.data.error,
@@ -38,7 +38,7 @@ const ValidationRegister = () => {
          .catch((err) => {
             toast({
                status: "error",
-               description: err.response.data?.data.error,
+               description: err.response.data?.error,
                duration: 3000,
                isClosable: true,
             });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Stack, useToast } from "@chakra-ui/react";
+import { Button, Container, Heading, Stack, useToast } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/useAuth";
@@ -75,6 +75,9 @@ const LoginPage = () => {
             justify="center"
             align="center"
             h="100vh">
+            <Heading as="h3" mb="20" color="var(--primary)">
+               Login Mahasiswa
+            </Heading>
             <form onSubmit={handleSubmit} style={{ minWidth: "320px" }}>
                <InputComponent
                   type="text"

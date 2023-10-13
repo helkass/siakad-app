@@ -61,10 +61,10 @@ const DrawerNavigation = ({ isOpen, onClose, btnRef }) => {
    const isAuthenticatedMahasiswa = isUnauthenticated();
 
    const getUser = useCallback(async () => {
-      if (!user) {
-         await mahasiswa.get(`/mahasiswa/${user.id}`);
-      } else {
+      if (isAuthenticatedMahasiswa) {
          await mahasiswa.get(`/mahasiswa/${isAuthenticatedMahasiswa.id}`);
+      } else {
+         await mahasiswa.get(`/mahasiswa/${user.id}`);
       }
    }, []);
 

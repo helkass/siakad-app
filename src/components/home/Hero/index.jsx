@@ -43,12 +43,14 @@ const HeroComponent = () => {
                   </Button>
                </ChakraLink>
             </Box>
-            <Image
-               maxW={"550px"}
-               loading="lazy"
-               src={heroImage}
-               alt="banner image"
-            />
+            <Box maxW={"550px"}>
+               <Image
+                  loading="lazy"
+                  src={heroImage}
+                  alt="banner image"
+                  objectFit="contain"
+               />
+            </Box>
          </HStack>
       </Container>
    );

@@ -61,6 +61,7 @@ const RegistrasiPage = () => {
             .then((res) => {
                if (res.status === 200) {
                   event.target.reset();
+                  setProfilePic(null);
                   toast({
                      title: "Status Pendaftaran",
                      type: "success",
@@ -142,11 +143,11 @@ const RegistrasiPage = () => {
             <Heading>Pendaftaran</Heading>
             <form onSubmit={handleSubmit}>
                <Stack spacing={8} mt={5}>
-                  <HStack
+                  <Stack
                      direction={{ base: "column", md: "row" }}
                      align="start"
                      spacing="6">
-                     <VStack w={{ base: "200%", md: "50%" }}>
+                     <VStack w={{ base: "100%", md: "50%" }}>
                         {/* form input mahasiswa */}
                         <Heading fontSize={20} my={3}>
                            Data Mahasiswa
@@ -193,12 +194,14 @@ const RegistrasiPage = () => {
                               label="Kelas"
                               data={"kelas"}
                               id="kelas"
+                              name="kelas"
                               required
                               defaultValue="Pilih kelas"
                               onChange={handleChangeMahasiswa}
                            />
                            <InputSelects
                               label="Jurusan"
+                              name="jurusan"
                               data={"jurusan"}
                               defaultValue="Pilih jurusan"
                               id="jurusan"
@@ -258,7 +261,7 @@ const RegistrasiPage = () => {
                               required
                               name="alamat"
                               id="alamat"
-                              onChange={handleChangeWali}
+                              onChange={handleChangeMahasiswa}
                            />
                         </FormControl>
                         <HStack w="full">
@@ -269,7 +272,7 @@ const RegistrasiPage = () => {
                               }}>
                               <FormControl>
                                  <FormLabel htmlFor="image">
-                                    Ganti Foto Profile
+                                    Foto Profile
                                  </FormLabel>
                                  <Input
                                     type="file"
@@ -303,7 +306,7 @@ const RegistrasiPage = () => {
                         </HStack>
                      </VStack>
                      {/* form input wali mahasiswa */}
-                     <VStack w={{ base: "200%", md: "50%" }}>
+                     <VStack w={{ base: "100%", md: "50%" }}>
                         {/* form input mahasiswa */}
                         <Heading fontSize={20} my={3}>
                            Data Wali Mahasiswa
@@ -355,7 +358,7 @@ const RegistrasiPage = () => {
                            />
                         </HStack>
                      </VStack>
-                  </HStack>
+                  </Stack>
                   <Button
                      isLoading={isLoading}
                      loadingText="Loading..."

@@ -25,13 +25,16 @@ const HeaderComponent = () => {
                   <Image
                      loading="lazy"
                      boxSize={{ base: "35px", md: "50px" }}
-                     objectFit={"cover"}
+                     objectFit={"contain"}
                      src={logo}
                      alt="logo univ"
                   />
                </ChakraLink>
-               <Heading as="h1" fontSize={{ base: "18px", md: "24px" }}>
-                  Siakad <span>IAI Al Muhammad</span>
+               <Heading
+                  as="h1"
+                  fontSize={{ base: "18px", md: "24px" }}
+                  display={{ base: "none", md: "block" }}>
+                  Siakad IAI Al Muhammad
                </Heading>
             </HStack>
             <HStack gap={"20px"}>

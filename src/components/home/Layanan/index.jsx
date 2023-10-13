@@ -53,6 +53,7 @@ const LayananCard = ({ Icon, desc }) => {
             alignItems={"center"}
             rounded="lg"
             mb="12px"
+            color="var(--primary)"
             bg="gray.50">
             <Icon size={35} style={{ margin: "0 auto" }} />
          </Box>
