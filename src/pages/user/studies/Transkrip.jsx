@@ -27,45 +27,49 @@ const Transkrip = () => {
    return (
       <UserSection title="Transkrip Nilai">
          <TableContainer bg="white">
-            <Table variant="striped" size={"md"} colorScheme="blackAlpha" p="2">
-               <Thead>
-                  <Tr>
-                     <Th w="2%" rowSpan={2}>
-                        No.
-                     </Th>
-                     <Th rowSpan={2}>Kode mata kuliah</Th>
-                     <Th rowSpan={2}>nama mata kuliah</Th>
-                     <Th
-                        rowSpan={2}
-                        borderRight={"1px solid"}
-                        borderRightColor={"gray.200"}>
-                        sks
-                     </Th>
-                     <Th
-                        colSpan={3}
-                        textAlign="center"
-                        borderRight={"1px solid"}
-                        borderRightColor={"gray.200"}>
-                        perkuliahan
-                     </Th>
-                     <Th rowSpan={2}>sks*indeks</Th>
-                  </Tr>
-                  <Tr>
-                     <Th textAlign="center">angka</Th>
-                     <Th textAlign="center">huruf</Th>
-                     <Th
-                        textAlign="center"
-                        borderRight={"1px solid"}
-                        borderRightColor={"gray.200"}>
-                        indeks
-                     </Th>
-                  </Tr>
-               </Thead>
-               {hasilStudi.isLoading ? (
-                  <TableLoaderComponent />
-               ) : (
-                  hasilStudi.data !== null && (
-                     <>
+            {hasilStudi.isLoading ? (
+               <TableLoaderComponent />
+            ) : (
+               hasilStudi.data !== null && (
+                  <>
+                     <Table
+                        variant="striped"
+                        size={"md"}
+                        colorScheme="blackAlpha"
+                        p="2">
+                        <Thead>
+                           <Tr>
+                              <Th w="2%" rowSpan={2}>
+                                 No.
+                              </Th>
+                              <Th rowSpan={2}>Kode mata kuliah</Th>
+                              <Th rowSpan={2}>nama mata kuliah</Th>
+                              <Th
+                                 rowSpan={2}
+                                 borderRight={"1px solid"}
+                                 borderRightColor={"gray.200"}>
+                                 sks
+                              </Th>
+                              <Th
+                                 colSpan={3}
+                                 textAlign="center"
+                                 borderRight={"1px solid"}
+                                 borderRightColor={"gray.200"}>
+                                 perkuliahan
+                              </Th>
+                              <Th rowSpan={2}>sks*indeks</Th>
+                           </Tr>
+                           <Tr>
+                              <Th textAlign="center">angka</Th>
+                              <Th textAlign="center">huruf</Th>
+                              <Th
+                                 textAlign="center"
+                                 borderRight={"1px solid"}
+                                 borderRightColor={"gray.200"}>
+                                 indeks
+                              </Th>
+                           </Tr>
+                        </Thead>
                         <Tbody>
                            {hasilStudi.data.map((item, idx) => {
                               const { hasil_studi_matkul, ...rest } = item;
@@ -126,17 +130,15 @@ const Transkrip = () => {
                                  </Td>
 
                                  <Td textAlign={"right"}>
-                                    {Number(transkrip?.data[0].nilai).toFixed(
-                                       2
-                                    )}
+                                    {Number(transkrip.data.nilai).toFixed(2)}
                                  </Td>
                               </Tr>
                            )}
                         </Tfoot>
-                     </>
-                  )
-               )}
-            </Table>
+                     </Table>
+                  </>
+               )
+            )}
          </TableContainer>
       </UserSection>
    );

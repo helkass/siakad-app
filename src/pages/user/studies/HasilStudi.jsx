@@ -36,9 +36,9 @@ const HasilStudi = () => {
 
    const printPdf = async () => {
       const htmlResult = await templateHtmlHasilStudi(
-         transkrip?.data[0]?.mahasiswa,
+         user,
          hasilStudi.data,
-         transkrip.data[0]
+         transkrip.data
       );
       const pW = window.open("", "", `height="100%", width="100%"`);
       pW.document.write(htmlResult);
