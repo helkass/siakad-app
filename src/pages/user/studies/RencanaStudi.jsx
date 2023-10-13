@@ -7,6 +7,7 @@ import {
    Th,
    Thead,
    Tr,
+   useToast,
 } from "@chakra-ui/react";
 import ErrorBoundary from "../../../components/error/ErrorBoundary";
 import UserSection from "../../../components/layout/UserSection";
@@ -15,19 +16,45 @@ import { AiFillPrinter } from "react-icons/ai";
 import { useFetch } from "../../../helpers";
 import { useAuth } from "../../../contexts/useAuth";
 import { useEffect } from "react";
+import apiClient from "../../../api/apiClient";
 
 const RencanaStudi = () => {
    const jadwalKuliah = useFetch();
    const rencanaStudi = useFetch();
-
+   const toast = useToast({ duration: 3000, isClosable: true });
    const { user } = useAuth();
 
-   const handleDownload = () => {
+   console.log(rencanaStudi.data);
+
+   const handleDownload = async () => {
       const link = document.createElement("a");
 
-      link.href = `data:application/pdf;base64,${
-         rencanaStudi.data.file.toString().split(",")[1]
-      }`;
+      if (!rencanaStudi.data?.file) {
+         await apiClient
+            .get(`/transkrip/rencana?nim=${user.nim}`, {
+               headers: {
+                  "Content-Type": "application/json",
+                  api_key_siakad: JSON.parse(
+                     localStorage.getItem("api_key_siakad")
+                  ),
+               },
+            })
+            .then((res) => {
+               if (res.status === 200) {
+                  link.href = res.data.data.file;
+               }
+
+               if (res.status === 400) {
+                  toast({ status: "error", description: res.data.data.error });
+               }
+            })
+            .catch((err) => {
+               toast({ status: "error", description: err.response.data.error });
+            });
+      } else {
+         link.href = rencanaStudi.data.file;
+      }
+
       link.download = `KRS_${rencanaStudi.data?.nim}.pdf`;
       link.click();
    };
