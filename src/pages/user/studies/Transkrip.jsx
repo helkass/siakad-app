@@ -27,16 +27,12 @@ const Transkrip = () => {
    return (
       <UserSection title="Transkrip Nilai">
          <TableContainer bg="white">
-            {hasilStudi.isLoading ? (
-               <TableLoaderComponent />
-            ) : (
-               hasilStudi.data !== null && (
-                  <>
-                     <Table
-                        variant="striped"
-                        size={"md"}
-                        colorScheme="blackAlpha"
-                        p="2">
+            <Table variant="striped" size={"md"} colorScheme="blackAlpha" p="2">
+               {hasilStudi.isLoading ? (
+                  <TableLoaderComponent />
+               ) : (
+                  hasilStudi.data !== null && (
+                     <>
                         <Thead>
                            <Tr>
                               <Th w="2%" rowSpan={2}>
@@ -135,10 +131,10 @@ const Transkrip = () => {
                               </Tr>
                            )}
                         </Tfoot>
-                     </Table>
-                  </>
-               )
-            )}
+                     </>
+                  )
+               )}
+            </Table>
          </TableContainer>
       </UserSection>
    );
