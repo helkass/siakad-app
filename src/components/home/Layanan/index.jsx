@@ -3,14 +3,7 @@ import { PiStudentBold } from "react-icons/pi";
 import { RiBillLine } from "react-icons/ri";
 import { SiAuthy } from "react-icons/si";
 import { FaRegListAlt } from "react-icons/fa";
-import {
-   Container,
-   Heading,
-   Box,
-   Text,
-   Stack,
-   SimpleGrid,
-} from "@chakra-ui/react";
+import { Container, Heading, Box, Text, Stack } from "@chakra-ui/react";
 
 const LayananComponent = () => {
    return (
@@ -27,11 +20,16 @@ const LayananComponent = () => {
                   Muhammad Cepu
                </Text>
             </Box>
-            <SimpleGrid columns={[2, null, 4]} spacing="20px">
+            <Stack
+               display="flex"
+               wrap="wrap"
+               direction="row"
+               justify={{ base: "center" }}
+               spacing={{ base: "10px", sm: "15px", md: "20px" }}>
                {layananLists.map((item, idx) => (
                   <LayananCard {...item} key={idx} />
                ))}
-            </SimpleGrid>
+            </Stack>
          </Stack>
       </Container>
    );
@@ -44,7 +42,7 @@ const LayananCard = ({ Icon, desc }) => {
          rounded={"md"}
          boxShadow={"md"}
          textAlign="center"
-         w={{ base: "180px", md: "220px" }}
+         w={{ base: "160px", sm: "180px", md: "220px" }}
          p="12px">
          <Box
             h={"90px"}

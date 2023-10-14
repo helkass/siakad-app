@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { InputComponent, InputSelects } from "../../components/common";
+import {
+   InputComponent,
+   InputSelects,
+   LoaderComponent,
+} from "../../components/common";
 import userFp from "../../assets/user.jpg";
 import { getBase64 } from "../../utils/base64Converter";
 import { useEffect } from "react";
@@ -16,6 +20,7 @@ import {
    Heading,
    Image,
    Input,
+   Spinner,
    Stack,
    Textarea,
    VStack,
@@ -121,6 +126,9 @@ const RegistrasiPage = () => {
                })
                .catch(() => {
                   navigate("/registrasi", { replace: true });
+               })
+               .finally(() => {
+                  setLoading(false);
                });
          }
 
@@ -131,7 +139,7 @@ const RegistrasiPage = () => {
    }, []);
 
    return (
-      <Container as="section" maxW="7xl">
+      <Container as="section" maxW="7xl" pos="relative">
          <Helmet>
             <meta
                name="description"
@@ -139,6 +147,29 @@ const RegistrasiPage = () => {
             />
             <title>Registrasi Siakad Mahasiswa | IAI Al Muhammad Cepu</title>
          </Helmet>
+         {isLoading && (
+            <Stack
+               w="100%"
+               maxW="7xl"
+               pos="fixed"
+               display="flex"
+               justify="center"
+               align="center"
+               bg="whiteAlpha.400"
+               backdropFilter={"blur(1px)"}
+               cursor="not-allowed"
+               top={0}
+               zIndex={50}
+               minH="100vh">
+               <Spinner
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="green.100"
+                  color="var(--primary)"
+                  size="xl"
+               />
+            </Stack>
+         )}
          <VStack my={5}>
             <Heading>Pendaftaran</Heading>
             <form onSubmit={handleSubmit}>
@@ -360,8 +391,6 @@ const RegistrasiPage = () => {
                      </VStack>
                   </Stack>
                   <Button
-                     isLoading={isLoading}
-                     loadingText="Loading..."
                      type="submit"
                      bg="var(--primary)"
                      color="white"
