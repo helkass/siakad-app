@@ -103,7 +103,6 @@ const RegistrasiPage = () => {
 
    useEffect(() => {
       const checkKode = async () => {
-         setLoading(true);
          // get kode and kelas validation from localstorage
          const val = localStorage.getItem("validation")
             ? JSON.parse(localStorage.getItem("validation"))
@@ -126,13 +125,8 @@ const RegistrasiPage = () => {
                })
                .catch(() => {
                   navigate("/registrasi", { replace: true });
-               })
-               .finally(() => {
-                  setLoading(false);
                });
          }
-
-         setLoading(false);
       };
 
       checkKode();
@@ -149,8 +143,8 @@ const RegistrasiPage = () => {
          </Helmet>
          {isLoading && (
             <Stack
-               w="100%"
-               maxW="7xl"
+               w="100vw"
+               left={0}
                pos="fixed"
                display="flex"
                justify="center"
